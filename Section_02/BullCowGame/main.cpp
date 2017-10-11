@@ -4,14 +4,18 @@
 using namespace std;
 
 void PrintIntro();
-void EchoGuess();
 string GetGuess();
-
+void EchoGuess();
 
 int main() {
-
+	
 	PrintIntro();
-	EchoGuess();
+	
+	// loop for the number of turns asking for guesses
+	constexpr int NUMBER_OF_TURNS = 5;
+	for (int count = 0; count < NUMBER_OF_TURNS; count++) {
+		EchoGuess();
+	}
 
 	return 0;
 }
