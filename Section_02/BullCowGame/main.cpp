@@ -6,16 +6,19 @@ using namespace std;
 void PrintIntro();
 string GetGuess();
 void EchoGuess();
+void PlayGame();
+bool AskToPlayAgain();
 
+
+// entry point for application
 int main() {
 	
-	PrintIntro();
-	
-	// loop for the number of turns asking for guesses
-	constexpr int NUMBER_OF_TURNS = 5;
-	for (int count = 0; count < NUMBER_OF_TURNS; count++) {
-		EchoGuess();
-	}
+	bool bPlayAgain = false;
+	do {
+		PrintIntro();
+		PlayGame();
+		bPlayAgain = AskToPlayAgain();
+	} while (bPlayAgain);
 
 	return 0;
 }
@@ -43,7 +46,27 @@ string GetGuess() {
 void EchoGuess() {
 	
 	// ehco the guess
-	cout << "You guessed " << GetGuess() << "..." << endl;
+	string Guess = GetGuess();
+	cout << "You guessed " << Guess << "..." << endl;
 	cout << endl;
+
+}
+
+void PlayGame() {
+	
+	// loop for the number of turns asking for guesses
+	constexpr int NUMBER_OF_TURNS = 5;
+	for (int count = 0; count < NUMBER_OF_TURNS; count++) {
+		EchoGuess();
+	}
+
+}
+
+bool AskToPlayAgain() {
+	
+	cout << "Do you want to play again Y/N?\n";
+	string Response = "";
+	getline(cin, Response);
+	return (Response[0] == 'y' || Response[0] == 'Y');
 
 }
