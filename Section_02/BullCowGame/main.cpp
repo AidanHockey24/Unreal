@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include "FBullCowGame.h"
 
 void PrintIntro();
-string GetGuess();
+std::string GetGuess();
 void EchoGuess();
 void PlayGame();
 bool AskToPlayAgain();
 
+FBullCowGame BCGame; // instantiate a new game
 
 // entry point for application
 int main() {
@@ -27,18 +27,20 @@ void PrintIntro() {
 
 	constexpr int WORD_LENGTH = 5;
 	// displays welcome messeges
-	cout << "Welcome to Bulls and Cows!!\n";
-	cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n";
-	cout << endl;
+	std::cout << "Welcome to Bulls and Cows!!\n";
+	std::cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n";
+	std::cout << std::endl;
 
 }
 
-string GetGuess() {
+std::string GetGuess() {
+
+	int CurrentTry = BCGame.GetCurrentTry();
 
 	// get a guess from the user
-	string Guess = "";
-	cout << "Enter your guess: ";
-	getline(cin, Guess);
+	std::string Guess = "";
+	std::cout << "Try " << CurrentTry << " - Enter your guess: ";
+	std::getline(std::cin, Guess);
 
 	return Guess;
 }
@@ -46,17 +48,19 @@ string GetGuess() {
 void EchoGuess() {
 	
 	// ehco the guess
-	string Guess = GetGuess();
-	cout << "You guessed " << Guess << "..." << endl;
-	cout << endl;
+	std::string Guess = GetGuess();
+	std::cout << "You guessed " << Guess << "..." << std::endl;
+	std::cout << std::endl;
 
 }
 
 void PlayGame() {
-	
+
+	int MaxTries = BCGame.GetMaxTries();
+	std::cout << MaxTries << std::endl;
+
 	// loop for the number of turns asking for guesses
-	constexpr int NUMBER_OF_TURNS = 5;
-	for (int count = 0; count < NUMBER_OF_TURNS; count++) {
+	for (int count = 0; count < MaxTries; count++) {
 		EchoGuess();
 	}
 
@@ -64,9 +68,9 @@ void PlayGame() {
 
 bool AskToPlayAgain() {
 	
-	cout << "Do you want to play again Y/N?\n";
-	string Response = "";
-	getline(cin, Response);
+	std::cout << "Do you want to play again Y/N?\n";
+	std::string Response = "";
+	std::getline(std::cin, Response);
 	return (Response[0] == 'y' || Response[0] == 'Y');
 
 }
